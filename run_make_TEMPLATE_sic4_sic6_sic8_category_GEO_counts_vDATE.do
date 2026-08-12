@@ -1,9 +1,6 @@
 /*******************************************************************************
 * NETS SCRIPT TEMPLATE
-* Based on pjclarke postofficesbanks template (v20240825)
-* Updated by wclary 20251207
-*   - Fixed missing opening quotes
-*   - Updated paths for Z:/ environment
+* Based on pjclarke postofficesbanks template
 *
 * CONFIG VARIABLES REQUIRING UPDATE:
 *   versiondate  - Format YYYYMMDD
@@ -11,8 +8,9 @@
 *   geoid        - ID variable: tract_fips10, tract_fips20, zcta10, zcta20
 *   catgroup     - Category group name for filenames
 *   script_dir   - Path to your .do files
+*   outdir       - Path for combined count output files
 *
-* CATEGORY BLOCKS REQURING UPDATE:
+* CATEGORY BLOCKS REQUIRING UPDATE:
 *   myname       - Variable suffix (short, no spaces)
 *   mylabel      - Human-readable label
 *   sic8s        - Space-separated SIC codes
@@ -21,11 +19,12 @@
 *******************************************************************************/
 
 * === CONFIG - CHECK VALUES ===
-local versiondate "20251207"
+local versiondate "YYYYMMDD"
 local geo "tract10"
 local geoid "tract_fips10"
 local catgroup "YOURCATGROUP"
-local script_dir "Z:/NETS_code/2022/wclary/sample_code/"
+local script_dir "PATH/TO/YOUR/SCRIPTS/"
+local outdir "PATH/TO/YOUR/OUTPUT/`geo'/"
 
 
 capture log close
@@ -77,7 +76,6 @@ local allsic8s "`allsic8s' `sic8s'"
 capture log close
 log using "`script_dir'make_`geo'_`catgroup'_subset_v`versiondate'.log", replace
 
-local outdir "Z:/2022/out_data/combine_counts/`geo'/"
 local outfile "`outdir'`geo'_`catgroup'_subset_`versiondate'"
 
 local loop_no = 1
